@@ -1,6 +1,6 @@
 # Default is "World"
 # #Author: Tushar (Tush@gmail.com)
-# changes in this file
+# changed it at 8th point
 require 'greeter'
 
 # Default is World
