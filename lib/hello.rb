@@ -1,6 +1,6 @@
 # Default is "World"
 # #Author: Tushar (Tush@gmail.com)
-# this commit is in master
+# this commit is in merged branch master
 require 'greeter'
 
 # Default is World
