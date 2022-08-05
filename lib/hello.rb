@@ -1,6 +1,6 @@
 # Default is "World"
 # #Author: Tushar (Tush@gmail.com)
-# changed it at 8th point
+# this commit is in master
 require 'greeter'
 
 # Default is World
