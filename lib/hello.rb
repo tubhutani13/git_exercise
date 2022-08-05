@@ -1,6 +1,6 @@
 # Default is "World"
 # #Author: Tushar (Tush@gmail.com)
-# changes in this file
+# This is an unwanted but committed change
 require 'greeter'
 
 # Default is World
