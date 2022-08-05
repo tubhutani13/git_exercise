@@ -1,0 +1,235 @@
+Alias Used - git hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
+1.
+mkdir git_exercise
+cd git_exercise
+git init
+git remote add origin git@github.com:tubhutani13/git_exercise.git
+2,3,4.
+git add. # to add files created in the immersion lab with hello world program
+git commit -m "First commit with Files"
+# Added files
+git add lib/hello.rb
+git commit -m "Change World to Bot"
+# changed File
+git diff (-    "Hello, #{@who}"
++    "Hello, #{@who} , How are You doing")
+git add lib/greeter.rb
+git commit -m "added how are you doing?"
+git diff (-  def greet
++  def greet_in_english)
+git commit -m "changed greet to greet in english"
+5.
+git diff
+(-# changes in this file
++# changes without staging)
+git checkout lib/hello.rb
+6.
+git diff
+(-# changes in this file
++# This is an unwanted but staged comment)
+git add lib/hello.rb
+git status
+(modified:   lib/hello.rb)
+git reset HEAD lib/hello.rb
+(Unstaged changes after reset:
+M       lib/hello.rb)
+git checkout lib/hello.rb
+git status
+(On branch master
+nothing to commit, working tree clean)
+7.
+git diff
+(-# changes in this file
++# This is an unwanted but committed change)
+git add lib/hello.rb
+git commit -m "this commit is not needed"
+git revert HEAD 
+([master 0f156d1] Revert "this commit is not needed"
+ 1 file changed, 1 insertion(+), 1 deletion(-))
+8.
+git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   lib/hello.rb
+git add lib/hello.rb
+git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   lib/hello.rb
+git commit -m "changes for point 8"
+git status
+On branch master
+nothing to commit, working tree clean
+9.
+git log
+commit 9413ab703ae0991628ce9a4c44a86891a3831c27 (HEAD -> master)
+Author: Tushar Bhutani <tubhutani13@gmail.com>
+Date:   Fri Aug 5 17:54:12 2022 +0530
+
+    changes for point 8
+
+commit 0f156d14a7ff14e146a4adee04edbf96d18057a7
+Author: Tushar Bhutani <tubhutani13@gmail.com>
+Date:   Fri Aug 5 17:48:22 2022 +0530
+
+    Revert "this commit is not needed"
+
+    This reverts commit 6f9a3b591c9e236e67fb47a7adf4ca486f2b6e42.
+
+commit 6f9a3b591c9e236e67fb47a7adf4ca486f2b6e42
+Author: Tushar Bhutani <tubhutani13@gmail.com>
+Date:   Fri Aug 5 17:47:38 2022 +0530
+
+    this commit is not needed
+
+commit 368ae0efb7ce88ca1c71e01ee3b19e9215f44edd
+Author: Tushar Bhutani <tubhutani13@gmail.com>
+Date:   Fri Aug 5 16:23:29 2022 +0530
+
+    changed greet to greet in english
+
+commit d31ae3f1b27ff97b3b1c4f0daf5a04ada712d7bb
+Author: Tushar Bhutani <tubhutani13@gmail.com>
+Date:   Fri Aug 5 16:13:14 2022 +0530
+
+    added how are you doing?
+
+commit 8b10ecc31ada156c90b45c9824c666eef8b0ed80
+Author: Tushar Bhutani <tubhutani13@gmail.com>
+Date:   Fri Aug 5 16:05:36 2022 +0530
+
+    Change World to Bot
+
+commit 1b066a0c9371058be21c14f0265758caa07919fb
+Author: Tushar Bhutani <tubhutani13@gmail.com>
+Date:   Fri Aug 5 16:03:02 2022 +0530
+
+    First commit with Files
+(END)
+
+OR
+
+git hist --all(alias used alias at the top)
+* 9413ab7 2022-08-05 | changes for point 8 (HEAD -> master) [Tushar Bhutani]
+* 0f156d1 2022-08-05 | Revert "this commit is not needed" [Tushar Bhutani]
+* 6f9a3b5 2022-08-05 | this commit is not needed [Tushar Bhutani]
+* 368ae0e 2022-08-05 | changed greet to greet in english [Tushar Bhutani]
+* d31ae3f 2022-08-05 | added how are you doing? [Tushar Bhutani]
+* 8b10ecc 2022-08-05 | Change World to Bot [Tushar Bhutani]
+* 1b066a0 2022-08-05 | First commit with Files [Tushar Bhutani]
+10.
+git show 6f9a3b5
+commit 6f9a3b591c9e236e67fb47a7adf4ca486f2b6e42
+Author: Tushar Bhutani <tubhutani13@gmail.com>
+Date:   Fri Aug 5 17:47:38 2022 +0530
+
+    this commit is not needed
+
+diff --git a/lib/hello.rb b/lib/hello.rb
+index 4c8c544..049fb22 100644
+--- a/lib/hello.rb
++++ b/lib/hello.rb
+@@ -1,6 +1,6 @@
+ # Default is "World"
+ # #Author: Tushar (Tush@gmail.com)
+-# changes in this file
++# This is an unwanted but committed change
+ require 'greeter'
+
+ # Default is World
+(END)
+11.
+git branch feature1
+git branch feature2
+git branch --delete feature2
+(Deleted branch feature2 (was 9413ab7))
+12.
+git checkout feature1
+Switched to branch 'feature1'
+git add lib/hello.rb
+git commit -m "this is a commit in feature1"
+[feature1 7dab154] this is a commit in feature1
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+git checkout master
+git commit -m "this is a commit in master"
+[master 6864e19] this is a commit in master
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+git merge feature1
+Auto-merging lib/hello.rb
+CONFLICT (content): Merge conflict in lib/hello.rb
+Automatic merge failed; fix conflicts and then commit the result.
+# after changing the result in editor
+git add lib/hello.rb
+git commit -m "this is a commit in merged branch"
+[master 14fb7a2] this is a commit in merged branch
+15.
+git checkout -b feature2
+git diff
+-# this commit is in merged branch master
++# this commit is in feature2 branch
+git add lib/hello.rb
+git commit -m "this is a commit in feature2"
+[feature2 b08421d] this is a commit in feature2
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+16. 
+git checkout master
+git add lib/hello.rb
+git commit -m "this is a commit in master branch"
+[master 02a64af] this is a commit in master branch
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+git rebase master
+Auto-merging lib/hello.rb
+CONFLICT (content): Merge conflict in lib/hello.rb
+error: could not apply b08421d... this is a commit in feature2
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+Could not apply b08421d... this is a commit in feature2
+git rebase --continue
+18.
+\Merge merges the two branches keepng the baranch intact and doesnt change the history
+\ rebase takes the base of other branch and puts it above the current ranch which in turn changes the history
+19.
+# Edit in document
+git status
+git stash
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   lib/hello.rb
+
+no changes added to commit (use "git add" and/or "git commit -a")
+git stash
+Saved working directory and index state WIP on master: 02a64af this is a commit in master branch
+git stash pop
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   lib/hello.rb
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (2d2063fb0db10220e8017d84522aaed6e17555da)
+20.
+git push -u -f origin master(-u = --set-upstream = -f --force)
+The authenticity of host 'github.com (13.234.210.38)' can't be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+Enumerating objects: 46, done.
+Counting objects: 100% (46/46), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (45/45), done.
+Writing objects: 100% (46/46), 3.78 KiB | 774.00 KiB/s, done.
+Total 46 (delta 21), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (21/21), done.
+To github.com:tubhutani13/git_exercise.git
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.
