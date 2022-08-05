@@ -7,4 +7,4 @@ require 'greeter'
 name = ARGV.first || "Bot"
 
 greeter = Greeter.new(name)
-puts greeter.greet
+puts greeter.greet_in_english
